@@ -1,0 +1,3 @@
+[submodule "MobiPerf"]
+	path = MobiPerf
+	url = https://github.com/Mobiperf/MobiPerf.git
