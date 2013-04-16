@@ -3,31 +3,25 @@
 set -x
 set -e
 
-export TOPDIR=/home/michigan_1
-mkdir -p $TOPDIR
+if [ -z "$SOURCE_DIR" ] ; then
+    echo "Expected SOURCE_DIR in environment"
+    exit 1
+fi
+if [ -z "$BUILD_DIR" ] ; then
+    echo "Expected BIULD_DIR in environment"
+    exit 1
+fi
 
-rm -rf $TOPDIR/*
-rm -rf MobiPerf
-
-[ -d MobiPerf ] || \
-    git clone -b master https://github.com/Mobiperf/MobiPerf.git 
-
-pushd MobiPerf
-    git checkout f9e8cd23b542cd04a7f0c412e6588d8ce884bb1a
-popd
+if test -d $BUILD_DIR ; then
+    rm -rf $BUILD_DIR/*
+fi
 
 pushd MobiPerf/tcpserver
-    ([ -f mlab/Uplink.jar ] && \
-     [ -f mlab/Downlink.jar ] && \
-     [ -f mlab/ServerConfig.jar ] ) || \
-        ./compile.sh
-    git show --quiet > $TOPDIR/version || :   # git returns non-zero here.
+    ./compile.sh
 popd
 
-mkdir -p $TOPDIR/mobiperf
-cp -r MobiPerf/tcpserver/mlab/*  $TOPDIR/mobiperf/
-install -D -m 0755 MobiPerf/tcpserver/initialize.sh $TOPDIR/init/initialize.sh
-install -D -m 0755 MobiPerf/tcpserver/start.sh $TOPDIR/init/start.sh
-install -D -m 0755 MobiPerf/tcpserver/stop.sh $TOPDIR/init/stop.sh
-
-tar -C $TOPDIR -cvf michigan_1.tar .
+mkdir -p $BUILD_DIR/mobiperf
+cp -r MobiPerf/tcpserver/mlab/*  $BUILD_DIR/mobiperf/
+install -D -m 0755 MobiPerf/tcpserver/initialize.sh $BUILD_DIR/init/initialize.sh
+install -D -m 0755 MobiPerf/tcpserver/start.sh $BUILD_DIR/init/start.sh
+install -D -m 0755 MobiPerf/tcpserver/stop.sh $BUILD_DIR/init/stop.sh
