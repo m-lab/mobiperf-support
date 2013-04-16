@@ -16,12 +16,12 @@ if test -d $BUILD_DIR ; then
     rm -rf $BUILD_DIR/*
 fi
 
-pushd MobiPerf/tcpserver
+pushd $SOURCE_DIR/MobiPerf/tcpserver
     ./compile.sh
 popd
 
 mkdir -p $BUILD_DIR/mobiperf
-cp -r MobiPerf/tcpserver/mlab/*  $BUILD_DIR/mobiperf/
-install -D -m 0755 MobiPerf/tcpserver/initialize.sh $BUILD_DIR/init/initialize.sh
-install -D -m 0755 MobiPerf/tcpserver/start.sh $BUILD_DIR/init/start.sh
-install -D -m 0755 MobiPerf/tcpserver/stop.sh $BUILD_DIR/init/stop.sh
+cp -r $SOURCE_DIR/MobiPerf/tcpserver/mlab/*  $BUILD_DIR/mobiperf/
+install -D -m 0755 $SOURCE_DIR/MobiPerf/tcpserver/initialize.sh $BUILD_DIR/init/initialize.sh
+install -D -m 0755 $SOURCE_DIR/MobiPerf/tcpserver/start.sh $BUILD_DIR/init/start.sh
+install -D -m 0755 $SOURCE_DIR/MobiPerf/tcpserver/stop.sh $BUILD_DIR/init/stop.sh
