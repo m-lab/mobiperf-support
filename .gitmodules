@@ -1,3 +1,6 @@
 [submodule "MobiPerf"]
 	path = MobiPerf
 	url = https://github.com/Mobiperf/MobiPerf.git
+[submodule "package"]
+	path = package
+	url = https://github.com/m-lab-tools/package.git
