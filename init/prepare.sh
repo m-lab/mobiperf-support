@@ -21,7 +21,7 @@ pushd $SOURCE_DIR/MobiPerf/measurement_server
 popd
 
 mkdir -p $BUILD_DIR/mobiperf
-cp -r $SOURCE_DIR/MobiPerf/measurementserver/mlab/*  $BUILD_DIR/mobiperf/
+cp -r $SOURCE_DIR/MobiPerf/measurement_server/mlab/*  $BUILD_DIR/mobiperf/
 install -D -m 0755 $SOURCE_DIR/MobiPerf/measurement_server/initialize.sh $BUILD_DIR/init/initialize.sh
 install -D -m 0755 $SOURCE_DIR/MobiPerf/measurement_server/start.sh $BUILD_DIR/init/start.sh
 install -D -m 0755 $SOURCE_DIR/MobiPerf/measurement_server/stop.sh $BUILD_DIR/init/stop.sh
